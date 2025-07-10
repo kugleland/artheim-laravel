@@ -4,6 +4,8 @@ namespace Domain\Artwork\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Domain\Artist\Models\Artist;
+use Domain\Gallery\Models\Gallery;
 
 class Artwork extends Model
 {

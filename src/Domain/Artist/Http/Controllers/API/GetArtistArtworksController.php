@@ -5,16 +5,14 @@ namespace Domain\Artist\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Domain\Artist\Models\Artist;
-use Domain\Artwork\Models\Artwork;
-use Domain\Gallery\Models\Gallery;
 
-class ShowArtistController extends Controller
+class GetArtistArtworksController extends Controller
 {
     /**
      * Handle the incoming request.
      */
     public function __invoke(Artist $artist)
     {
-        return response()->json($artist->load('artworks', 'galleries'));
+        return response()->json($artist->artworks->load('artist', 'gallery'));
     }
 }
