@@ -16,6 +16,7 @@ class Artist extends Model implements HasMedia
     use HasFactory;
     use InteractsWithMedia;
     protected $guarded = [];
+    protected $appends = ['profile_image_url'];
 
     public function artworks()
     {

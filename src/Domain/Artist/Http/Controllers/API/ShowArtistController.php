@@ -16,6 +16,6 @@ class ShowArtistController extends Controller
      */
     public function __invoke(Artist $artist)
     {
-        return response()->json(ArtistData::from($artist->append('profile_image_url')));
+        return response()->json(ArtistData::from($artist));
     }
 }
