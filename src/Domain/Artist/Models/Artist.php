@@ -6,11 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Domain\Artwork\Models\Artwork;
 use Domain\Gallery\Models\Gallery;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Image\Enums\Fit;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Artist extends Model
+class Artist extends Model implements HasMedia
 {
     use HasFactory;
-
+    use InteractsWithMedia;
     protected $guarded = [];
 
     public function artworks()
@@ -21,5 +25,10 @@ class Artist extends Model
     public function galleries()
     {
         return $this->belongsToMany(Gallery::class);
+    }
+
+    public function getProfileImageUrlAttribute()
+    {
+        return $this->getFirstMediaUrl('profile_image');
     }
 }

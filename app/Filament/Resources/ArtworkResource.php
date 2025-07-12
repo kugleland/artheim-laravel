@@ -14,6 +14,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 
 class ArtworkResource extends Resource
 {
@@ -45,6 +46,9 @@ class ArtworkResource extends Resource
                     ->relationship('artist', 'first_name'),
                 Forms\Components\Select::make('gallery_id')
                     ->relationship('gallery', 'name'),
+                SpatieMediaLibraryFileUpload::make('primary_image')
+                    ->collection('primary_image')
+                    ->label('Primary Image'),
             ]);
     }
 

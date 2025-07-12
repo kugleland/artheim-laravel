@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 
 class ArtistResource extends Resource
 {
@@ -29,7 +30,9 @@ class ArtistResource extends Resource
                 Forms\Components\TextInput::make('last_name')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('alias'),
-
+                SpatieMediaLibraryFileUpload::make('profile_image')
+                    ->collection('profile_image')
+                    ->label('Profile Image'),
             ]);
     }
 

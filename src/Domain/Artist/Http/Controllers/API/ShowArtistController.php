@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Domain\Artist\Models\Artist;
 use Domain\Artwork\Models\Artwork;
 use Domain\Gallery\Models\Gallery;
+use Domain\Artist\Data\ArtistData;
 
 class ShowArtistController extends Controller
 {
@@ -15,6 +16,6 @@ class ShowArtistController extends Controller
      */
     public function __invoke(Artist $artist)
     {
-        return response()->json($artist->load('artworks', 'galleries'));
+        return response()->json(ArtistData::from($artist->append('profile_image_url')));
     }
 }
