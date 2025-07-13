@@ -5,6 +5,7 @@ namespace Domain\Artist\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Domain\Artist\Models\Artist;
+use Domain\Artwork\Data\ArtworkData;
 
 class GetArtistArtworksController extends Controller
 {
@@ -13,6 +14,6 @@ class GetArtistArtworksController extends Controller
      */
     public function __invoke(Artist $artist)
     {
-        return response()->json($artist->artworks->load('artist', 'gallery'));
+        return response()->json(ArtworkData::collect($artist->artworks()->paginate(10)));
     }
 }
