@@ -10,6 +10,10 @@ use Domain\Artist\Http\Controllers\API\{
     ShowArtistArtworkController,
 };
 
+use Domain\Gallery\Http\Controllers\API\{
+    GetGalleriesController,
+    ShowGalleryController,
+};
 
 
 Route::get('/user', function (Request $request) {
@@ -22,4 +26,9 @@ Route::group(['prefix' => 'artists'], function () {
     Route::get('/{artist}', ShowArtistController::class)->name('artists.show');
     Route::get('/{artist}/artworks', GetArtistArtworksController::class)->name('artists.artworks');
     Route::get('/{artist}/artworks/{artwork}', ShowArtistArtworkController::class)->name('artists.artworks.show');
+});
+
+Route::group(['prefix' => 'galleries'], function () {
+    Route::get('/', GetGalleriesController::class)->name('galleries.index');
+    Route::get('/{gallery}', ShowGalleryController::class)->name('galleries.show');
 });

@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ArtistResource\Pages;
-use App\Filament\Resources\ArtistResource\RelationManagers;
-use Domain\Artist\Models\Artist;
+use App\Filament\Resources\GalleryResource\Pages;
+use App\Filament\Resources\GalleryResource\RelationManagers;
+use Domain\Gallery\Models\Gallery;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -14,9 +14,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 
-class ArtistResource extends Resource
+class GalleryResource extends Resource
 {
-    protected static ?string $model = Artist::class;
+    protected static ?string $model = Gallery::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -24,18 +24,22 @@ class ArtistResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('first_name')
+                Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('last_name')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('alias')
-                    ->required()
-                    ->maxLength(255),
-                SpatieMediaLibraryFileUpload::make('profile_image')
-                    ->collection('profile_image')
-                    ->label('Profile Image'),
                 Forms\Components\TextInput::make('slug')
+                    ->maxLength(255),
+                Forms\Components\Textarea::make('description'),
+                SpatieMediaLibraryFileUpload::make('logo')
+                    ->collection('gallery_logo')
+                    ->label('Logo'),
+                SpatieMediaLibraryFileUpload::make('banner')
+                    ->collection('gallery_banner')
+                    ->label('Banner'),
+                SpatieMediaLibraryFileUpload::make('images')
+                    ->collection('gallery_images')
+                    ->label('Images')
+                    ->multiple(),
             ]);
     }
 
@@ -43,14 +47,9 @@ class ArtistResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('first_name'),
-                Tables\Columns\TextColumn::make('last_name'),
-                Tables\Columns\TextColumn::make('alias'),
+                Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('slug'),
-                Tables\Columns\TextColumn::make('bio'),
-                Tables\Columns\TextColumn::make('website'),
-                Tables\Columns\TextColumn::make('profile_image_path'),
-                Tables\Columns\TextColumn::make('created_at'),
+                Tables\Columns\TextColumn::make('user.name'),
             ])
             ->filters([
                 //
@@ -75,9 +74,9 @@ class ArtistResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListArtists::route('/'),
-            'create' => Pages\CreateArtist::route('/create'),
-            'edit' => Pages\EditArtist::route('/{record}/edit'),
+            'index' => Pages\ListGalleries::route('/'),
+            'create' => Pages\CreateGallery::route('/create'),
+            'edit' => Pages\EditGallery::route('/{record}/edit'),
         ];
     }
 }

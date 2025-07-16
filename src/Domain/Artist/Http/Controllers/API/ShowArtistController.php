@@ -14,8 +14,9 @@ class ShowArtistController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Artist $artist)
+    public function __invoke(string $slug)
     {
+        $artist = Artist::where('slug', $slug)->firstOrFail();
         return response()->json(ArtistData::from($artist));
     }
 }

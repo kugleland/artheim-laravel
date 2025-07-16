@@ -14,6 +14,7 @@ class ArtworkData extends Data
     public function __construct(
         public string $id,
         public string $title,
+        public string $slug,
         public ?string $description,
         public string $primary_image_url,
         public ?string $price,

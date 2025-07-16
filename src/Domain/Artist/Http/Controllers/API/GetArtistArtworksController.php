@@ -12,8 +12,9 @@ class GetArtistArtworksController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Artist $artist)
+    public function __invoke(string $artistSlug)
     {
+        $artist = Artist::where('slug', $artistSlug)->firstOrFail();
         return response()->json(ArtworkData::collect($artist->artworks()->paginate(10)));
     }
 }

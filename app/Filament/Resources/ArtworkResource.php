@@ -27,6 +27,7 @@ class ArtworkResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('title'),
+                Forms\Components\TextInput::make('slug'),
                 Forms\Components\TextInput::make('description'),
                 Forms\Components\TextInput::make('year'),
                 Forms\Components\TextInput::make('medium'),
@@ -57,6 +58,7 @@ class ArtworkResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title'),
+                Tables\Columns\TextColumn::make('slug'),
                 Tables\Columns\TextColumn::make('description'),
                 Tables\Columns\TextColumn::make('year'),
                 Tables\Columns\TextColumn::make('medium'),
